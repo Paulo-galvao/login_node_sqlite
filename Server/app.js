@@ -1,8 +1,8 @@
 import express from 'express';
 import sequelize from './config/database.js';
 import userRouter from './routes/userRoute.js';
+import cors from 'cors';
 import "dotenv/config";
-import authVerification from './middlewares/auth.js';
 
 try {
   await sequelize.authenticate();
@@ -15,16 +15,9 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Welcome to the Node.js SQLite Login System');  
-});
-
-app.get('/userarea', authVerification, (req, res) => {
-  res.send('Welcome to the User Area');
-});
-
-app.use('/users', userRouter);
+app.use('/', userRouter);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

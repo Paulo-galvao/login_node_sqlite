@@ -2,18 +2,6 @@ import User from "../models/User.js";
 import bcrypt from "bcrypt";
 import generateToken from "../services/generateToken.js";
 
-async function show(req, res) {
-    try {
-        
-        const users = await User.findAll();
-        res.status(200).send(users);
-    } catch (error) {
-        res.status(500).send({
-            message: "Error retrieving users",
-            error: error.message,
-        });
-    }
-}
 
 async function signin(req, res) {
     try {
@@ -89,7 +77,6 @@ async function login(req, res) {
     }
 }
 export default {
-    show,
     signin,
     login
 };
