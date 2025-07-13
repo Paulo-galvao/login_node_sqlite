@@ -12,13 +12,15 @@ export default function UserArea() {
       navigate("/");
     }
 
-    fetch("http://localhost:3021/", {
+    fetch("https://loginnodesqlite-production.up.railway.app/", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`
       }
     }).then( res => res.json() )
     .then( res => {
+      console.log(res);
+      
       setUser(res);
     }
     ).catch(error => alert(error));
