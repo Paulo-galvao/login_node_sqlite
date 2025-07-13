@@ -27,9 +27,11 @@ async function signin(req, res) {
         
         const user = await User.create({ username, password });
 
+        const token = generateToken(user.id);
+
         res.status(201).send({
             message: "User created successfully",
-            user
+            token
         });
 
     } catch (error) {
@@ -76,7 +78,10 @@ async function login(req, res) {
         res.status(500).send(error);
     }
 }
+
+
 export default {
     signin,
-    login
+    login,
+    
 };

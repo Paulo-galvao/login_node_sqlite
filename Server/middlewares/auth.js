@@ -20,14 +20,18 @@ async function authVerification(req, res, next) {
         }
 
         jwt.verify( token, secretkey, async( error, decoded ) => {
+            // console.log(decoded)
+            if(!decoded) {
+                return res.status(401).send({message: "Usuário não autorizado"});
+            }
             req.userId = decoded.id;
-            await User.findOne({
+            const user = await User.findOne({
                 where: {
                     id: req.userId,
             },
         });
-
-            return next();
+            return res.status(200).json(user);
+            
         });
 
     } catch (error) {

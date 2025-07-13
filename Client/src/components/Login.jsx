@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 
 
 export default function Login() {
@@ -56,6 +56,7 @@ export default function Login() {
             name="password" 
             className="bg-gray-100  focus:outline-indigo-300"/>
           <button  className="bg-blue-400 cursor-pointer mt-4 py-1 rounded-sm text-white hover:bg-blue-300" type="submit">Login</button>
+          <span className="text-sm mt-2">Ainda não possui conta? <Link className="text-blue-700" to={"/signin"}>Cadastre-se</Link> </span>
         </form>
       
       </>
